@@ -13,6 +13,10 @@ def slf4jVersion = '1.6.6'
 def junitVersion = '4.10'
 def jaxRsVersion = '1.1.1'
 def jasyptVersion = '1.9.0'
+def GuavaVersion = '23.5-jre'
+def commonscodecVersion='1.7'
+def luceneVersion='3.5.0'
+
 
 repositories {
     mavenCentral()
@@ -22,8 +26,12 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
+
+
     testCompile group: 'junit', name: 'junit', version: junitVersion
+
+    //Guava Version
+    compile group: 'com.google.guava', name: 'guava', version: GuavaVersion
 
     //JAX-RS
     compile group: 'javax.ws.rs', name: 'jsr311-api', version: jaxRsVersion
@@ -46,6 +54,12 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
     compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
 
+    compile group: 'commons-codec', name: 'commons-codec', version: commonscodecVersion
+
+    compile group: 'org.apache.lucene', name: 'lucene-spellchecker', version: luceneVersion
+
+
+    
     providedCompile "javax.servlet:servlet-api:2.5"
 }
 
