@@ -1,14 +1,63 @@
+
+
+apply plugin: 'idea'
+apply plugin: 'war'
+defaultTasks 'clean', 'build'
+
 group 'TecLeaCof'
 version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
 sourceCompatibility = 1.8
+def jerseyVersion = '1.13'
+def springVersion = '3.1.2.RELEASE'
+def slf4jVersion = '1.6.6'
+def junitVersion = '4.10'
+def jaxRsVersion = '1.1.1'
+def jasyptVersion = '1.9.0'
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://maven.springframework.org/release'
+    }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+
+    //JAX-RS
+    compile group: 'javax.ws.rs', name: 'jsr311-api', version: jaxRsVersion
+
+    //Jersey
+    runtime group: 'com.sun.jersey', name: 'jersey-server', version: jerseyVersion
+    runtime group: 'com.sun.jersey', name: 'jersey-servlet', version: jerseyVersion
+    runtime group: 'com.sun.jersey', name: 'jersey-core', version: jerseyVersion
+    runtime group: 'com.sun.jersey.contribs', name: 'jersey-spring', version: jerseyVersion
+
+    //Spring
+    runtime group: 'org.springframework', name: 'spring-web', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+
+    //Jasypt
+    compile group: 'org.jasypt', name: 'jasypt', version: jasyptVersion
+    compile group: 'org.jasypt', name: 'jasypt-spring31', version: jasyptVersion
+
+    //Logging
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
+
+    providedCompile "javax.servlet:servlet-api:2.5"
+}
+
+war {
+    archiveName = 'teachLearn-common.war'
+}
+
+//Just a helper to produce an exploded war, should one choose to use it
+war.doLast {
+    ant.unzip(src: war.archivePath, dest: "$buildDir/teachLearn-common")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.4'
 }

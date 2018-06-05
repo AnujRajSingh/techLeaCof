@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="Integration_main" target="1.8" />
+      <module name="Integration_test" target="1.8" />
       <module name="TecLeaCof_main" target="1.8" />
       <module name="TecLeaCof_test" target="1.8" />
     </bytecodeTargetLevel>
